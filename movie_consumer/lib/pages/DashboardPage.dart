@@ -1,6 +1,13 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:movie_consumer/constants/appInformation.dart';
-import 'package:movie_consumer/theme/themeMngr.dart';
+
+//Helpers
+import 'package:movie_consumer/helpers/colorHelper.dart';
+import 'package:movie_consumer/helpers/imageHelper.dart';
+
+//Fonts
+import 'package:google_fonts/google_fonts.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({Key key}) : super(key: key);
@@ -31,53 +38,135 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-          child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Expanded(
-                child: Column(
-              children: [Text("Hello again"), Text("Hello there")],
-            )),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
+      drawer: Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: ColorHelper
+                .darkThemeBackground(), //This will change the drawer background to blue.
+            //other styles
           ),
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text('Item 1'),
-            onTap: () {
-              //Navigator.
-              //Navigator.pop(context);
-              // Update the state of the app.
-              // ...
-            },
-            trailing: DropdownButton(
-              icon: Icon(Icons.arrow_drop_up),
-              items: <String>['One', 'Two', 'Free', 'Four']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-          ),
-          ListTile(
-            title: Text('Item 2'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-        ],
-      )),
+          child: Drawer(
+              child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(child: Text("")),
+              ListTile(
+                leading: Icon(Icons.search),
+                title: Text('Item 1'),
+                onTap: () {
+                  //Navigator.
+                  //Navigator.pop(context);
+                  // Update the state of the app.
+                  // ...
+                },
+                // trailing: DropdownButton(
+
+                //   icon: Icon(Icons.arrow_drop_up),
+                //   items: <String>['One', 'Two', 'Free', 'Four']
+                //       .map<DropdownMenuItem<String>>((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                // ),
+              ),
+              ListTile(
+                title: Text('Item 2'),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.search),
+                title: Text('Testing Again'),
+                onTap: () {
+                  //Navigator.
+                  //Navigator.pop(context);
+                  // Update the state of the app.
+                  // ...
+                },
+                // trailing: DropdownButton(
+
+                //   icon: Icon(Icons.arrow_drop_up),
+                //   items: <String>['One', 'Two', 'Free', 'Four']
+                //       .map<DropdownMenuItem<String>>((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                // ),
+              ),
+            ],
+          ))),
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(AppInformation.appName),
-      ),
+          backgroundColor: ColorHelper.darkThemeNavigationBar(),
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Row(
+            children: [
+              Image.asset("resources/images/titleIcon.png"),
+              Text(AppInformation.appName)
+            ],
+          ),
+          actions: [
+            FlatButton(
+                onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                            title: Text("Hello There"),
+                            backgroundColor:
+                                ColorHelper.darkThemeNavigationBar(),
+                            actions: [
+                              FlatButton(
+                                  onPressed: () => {
+//Login if not already signed in
+                                      },
+                                  splashColor: Colors.white38,
+                                  child: Text("Confirmed",
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            fontWeight: FontWeight.w200,
+                                            color: Colors.white,
+                                            letterSpacing: .5),
+                                      ))),
+                              FlatButton(
+                                  onPressed: () => {
+//Login if not already signed in
+                                      },
+                                  splashColor: Colors.white38,
+                                  child: Text("Cancel",
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            fontWeight: FontWeight.w200,
+                                            color: Colors.white,
+                                            letterSpacing: .5),
+                                      )))
+                            ])),
+                splashColor: Colors.white38,
+                textColor: ColorHelper.darkThemeTextColour(),
+                child: Text("Login",
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w200,
+                          color: Colors.white,
+                          letterSpacing: .5),
+                    ))),
+            FlatButton(
+                onPressed: () => {
+//Login if not already signed in
+                    },
+                textColor: ColorHelper.darkThemeTextColour(),
+                splashColor: Colors.white38,
+                child: Text("Register",
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w200,
+                          color: Colors.white,
+                          letterSpacing: .5),
+                    ))),
+          ]),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -111,7 +200,6 @@ class _DashboardPageState extends State<DashboardPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           //Run Some business logic here
-
           //Clicking on this will cause the user to begin a search for another movie
         },
         tooltip: 'Search for a new Movie',

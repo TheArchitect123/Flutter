@@ -1,5 +1,5 @@
 class NetworkHelper {
-  static bool CanConnectToServer() {
+  static bool canConnectToServer() {
     return true;
   }
 }
