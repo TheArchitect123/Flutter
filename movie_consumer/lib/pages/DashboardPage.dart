@@ -5,6 +5,10 @@ import 'package:movie_consumer/constants/appInformation.dart';
 //Helpers
 import 'package:movie_consumer/helpers/colorHelper.dart';
 import 'package:movie_consumer/helpers/imageHelper.dart';
+import 'package:dynamic_treeview/dynamic_treeview.dart';
+
+//Models
+import 'package:movie_consumer/models/treeViewModel.dart';
 
 //Fonts
 import 'package:google_fonts/google_fonts.dart';
@@ -35,71 +39,143 @@ class _DashboardPageState extends State<DashboardPage> {
     //Initialize any collections here
   }
 
+  List<BaseData> generateTreeView() {
+    return [
+      TreeViewModel(
+        id: 1,
+        name: 'RootModel',
+        parentId: -1,
+      ),
+      TreeViewModel(
+        id: 2,
+        name: 'Genres of Film',
+        parentId: 1,
+      ),
+      TreeViewModel(
+        id: 3,
+        name: 'Hollywood Movies',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Trending Now',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Suspensful TV War & Politics',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Top 10 in Australia',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Action TV',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Documentaries',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Exciting Criminal Investigation',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Familiar Favourites',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Binge Worthy TV',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Acclaimed Writers',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Action & Adventure',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Exciting TV Shows',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Historical TV Shows',
+        parentId: 2,
+      ),
+      TreeViewModel(
+        id: 4,
+        name: 'Popular on Netflix',
+        parentId: 2,
+      )
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: ColorHelper
-                .darkThemeBackground(), //This will change the drawer background to blue.
-            //other styles
-          ),
-          child: Drawer(
-              child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(child: Text("")),
-              ListTile(
-                leading: Icon(Icons.search),
-                title: Text('Item 1'),
-                onTap: () {
-                  //Navigator.
-                  //Navigator.pop(context);
-                  // Update the state of the app.
-                  // ...
-                },
-                // trailing: DropdownButton(
-
-                //   icon: Icon(Icons.arrow_drop_up),
-                //   items: <String>['One', 'Two', 'Free', 'Four']
-                //       .map<DropdownMenuItem<String>>((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                // ),
-              ),
-              ListTile(
-                title: Text('Item 2'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.search),
-                title: Text('Testing Again'),
-                onTap: () {
-                  //Navigator.
-                  //Navigator.pop(context);
-                  // Update the state of the app.
-                  // ...
-                },
-                // trailing: DropdownButton(
-
-                //   icon: Icon(Icons.arrow_drop_up),
-                //   items: <String>['One', 'Two', 'Free', 'Four']
-                //       .map<DropdownMenuItem<String>>((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                // ),
-              ),
-            ],
-          ))),
+      drawer: Drawer(
+          child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+        DynamicTreeView(
+            data: generateTreeView(),
+            config: Config(
+                parentPaddingEdgeInsets:
+                    EdgeInsets.only(left: 16, top: 0, bottom: 0, right: 0)),
+            width: 300),
+        Container(
+            child: ListTile(
+          leading: Icon(Icons.account_circle),
+          title: Text('My Profile'),
+          onTap: () {
+            // Update the state of the app.
+            // ...
+            Navigator.pop(context);
+          },
+        )),
+        Container(
+            child: ListTile(
+          leading: Icon(Icons.search),
+          title: Text('Search for Films'),
+          onTap: () {
+            // Update the state of the app.
+            // ...
+            Navigator.pop(context);
+          },
+        )),
+        Container(
+            child: ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings'),
+          onTap: () {
+            // Update the state of the app.
+            // ...
+            Navigator.pop(context);
+          },
+        )),
+        Container(
+            child: ListTile(
+          leading: Icon(Icons.exit_to_app),
+          title: Text('Sign Out'),
+          onTap: () {
+            // Update the state of the app.
+            // ...
+            Navigator.pop(context);
+          },
+        )),
+      ])),
       appBar: AppBar(
           backgroundColor: ColorHelper.darkThemeNavigationBar(),
           // Here we take the value from the MyHomePage object that was created by
